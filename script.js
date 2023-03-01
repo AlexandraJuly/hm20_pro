@@ -1,101 +1,49 @@
-//1 
-
-let funcWithMath = setMath('-');
-
-function setMath(znak) {
-    return function funcWithMath() {
-        const num = Array.from(arguments);
-        console.log(num);
-        if('+' === znak) {
-            function count() {
-                let sum = 0;
-                for (i = 0; i < num.length; i++) {
-                    sum += num[i];
-                    }
-                    return sum;
-            }
-            return `${num.join(" + ")} = ${count()}`;
-        }  else if('-' === znak) {
-            function count() {
-                let min = num[0] * 2;
-                for (i = 0; i < num.length; i++) {
-                    min -= num[i];
-                    }
-                    return min;
-            }
-            return `${num.join(" - ")} = ${count()}`;
-        } else if('*' === znak) {
-            function count() {
-                let mn = 1;
-                for (i = 0; i < num.length; i++) {
-                    mn *= num[i];
-                    }
-                    return mn;
-            }
-            return `${num.join(" * ")} = ${count()}`;
-        } else if('/' === znak) {
-            function count() {
-                let del = num[0] ** 2;
-                for (i = 0; i < num.length; i++) {
-                    del /= num[i];
-                    }
-                    return del;
-            }
-            return `${num.join(" / ")} = ${count()}`;
+// № 1
+function setMath (operator) {
+    return (...num) => {
+        let namToString = num.join(` ${operator} `);
+        let calculationNum = new Number;
+        switch (operator){
+            case '+':
+                calculationNum = num.reduce((sum, elem) => sum + elem);
+                break
+            case '-':
+                calculationNum = num.reduce((sum, elem) => sum - elem);
+                break
+            case '*':
+                calculationNum = num.reduce((sum, elem) => sum * elem);
+                break
+            case '/':
+                calculationNum = num.reduce((sum, elem) => sum / elem);
+                break
         }
+        return namToString + ' = ' + calculationNum;
     }
 }
+let funcWithMath = setMath('/');
+console.log(funcWithMath(17,40,5));
 
-let res = funcWithMath(10,2,3);
-console.log(res);
-
-//2
-
-let whatDo = setNumbers(10,2,3);
-
-function setNumbers() {
-    const num = Array.from(arguments);
-    console.log(num);
-    return function whatDo(znak) {
-        if('+' === znak) {
-            function count() {
-                let sum = 0;
-                for (i = 0; i < num.length; i++) {
-                    sum += num[i];
-                    }
-                    return sum;
-            }
-            return `${num.join(" + ")} = ${count()}`;
-        } else if('-' === znak) {
-            function count() {
-                let min = num[0] * 2;
-                for (i = 0; i < num.length; i++) {
-                    min -= num[i];
-                    }
-                    return min;
-            }
-            return `${num.join(" - ")} = ${count()}`;
-        } else if('*' === znak) {
-            function count() {
-                let mn = 1;
-                for (i = 0; i < num.length; i++) {
-                    mn *= num[i];
-                    }
-                    return mn;
-            }
-            return `${num.join(" * ")} = ${count()}`;
-        } else if('/' === znak) {
-            function count() {
-                let del = num[0] ** 2;
-                for (i = 0; i < num.length; i++) {
-                    del /= num[i];
-                    }
-                    return del;
-            }
-            return `${num.join(" / ")} = ${count()}`;
+// № 2
+function setNumbers(...num) {
+    return operator => {
+        let namToString = num.join(` ${operator} `);
+        let calculationNum = new Number;
+        switch (operator){
+            case '+':
+                calculationNum = num.reduce((sum, elem) => sum + elem);
+                break
+            case '-':
+                calculationNum = num.reduce((sum, elem) => sum - elem);
+                break
+            case '*':
+                calculationNum = num.reduce((sum, elem) => sum * elem);
+                break
+            case '/':
+                calculationNum = num.reduce((sum, elem) => sum / elem);
+                break
         }
+        return namToString + ' = ' + calculationNum;
     }
 }
-
+let whatDo = setNumbers(10,6,8);
 console.log(whatDo('/'));
-
